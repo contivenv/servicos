@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anúncio - Informática Limeira</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .card {
+            width: 620px;
+            max-width: 100%;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 24px;
+            padding: 38px 32px 32px 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #0d47a1, #1a73e8, #42a5f5, #1a73e8, #0d47a1);
+            background-size: 200% 100%;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 0%; }
+        }
+
+        .icon-header {
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .icon-header span {
+            font-size: 44px;
+        }
+
+        .titulo {
+            font-size: 28px;
+            font-weight: 800;
+            text-align: center;
+            color: #1a1a2e;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .titulo span {
+            background: linear-gradient(135deg, #0d47a1, #1a73e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitulo {
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            margin-top: 2px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #0d47a1, #42a5f5);
+            margin: 14px auto 18px auto;
+            border-radius: 4px;
+        }
+
+        .lista-servicos {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 10px 0;
+        }
+
+        .lista-servicos li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 9px 14px;
+            margin-bottom: 5px;
+            background: rgba(26, 115, 232, 0.04);
+            border-radius: 10px;
+            font-size: 15px;
+            color: #1a1a2e;
+            font-weight: 500;
+            transition: background 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .lista-servicos li:nth-child(1) { border-left-color: #0d47a1; }
+        .lista-servicos li:nth-child(2) { border-left-color: #1a73e8; }
+        .lista-servicos li:nth-child(3) { border-left-color: #42a5f5; }
+        .lista-servicos li:nth-child(4) { border-left-color: #64b5f6; }
+        .lista-servicos li:nth-child(5) { border-left-color: #ff6f00; }
+        .lista-servicos li:nth-child(6) { border-left-color: #2e7d32; }
+
+        .lista-servicos li .emoji {
+            font-size: 20px;
+            width: 30px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .lista-servicos li .detalhe {
+            font-weight: 400;
+            color: #666;
+            font-size: 13px;
+            margin-left: 2px;
+        }
+
+        .lista-servicos li .obs {
+            font-weight: 400;
+            color: #888;
+            font-size: 12px;
+            font-style: italic;
+            margin-left: auto;
+            background: #f0f2f5;
+            padding: 2px 10px;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        .preco-wrapper {
+            text-align: center;
+            margin: 8px 0 16px 0;
+        }
+
+        .preco-wrapper .por-apenas {
+            font-size: 13px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .preco {
+            font-size: 56px;
+            font-weight: 900;
+            color: #1a1a2e;
+            line-height: 1;
+            margin-top: 0px;
+        }
+
+        .preco .real {
+            font-size: 28px;
+            font-weight: 700;
+            vertical-align: super;
+            margin-right: 2px;
+        }
+
+        .preco .centavos {
+            font-size: 24px;
+            font-weight: 700;
+            vertical-align: super;
+        }
+
+        .preco .moeda {
+            font-size: 18px;
+            font-weight: 300;
+            color: #aaa;
+            margin-left: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e8f0fe;
+            color: #0d47a1;
+            padding: 3px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .contato {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            background: #e8f0fe;
+            padding: 12px 20px;
+            border-radius: 14px;
+            margin: 6px 0 12px 0;
+            border: 1px solid #d2e0f5;
+        }
+
+        .contato .icone-contato {
+            font-size: 20px;
+        }
+
+        .contato .texto-contato {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0d47a1;
+            letter-spacing: 0.5px;
+        }
+
+        .contato .texto-contato span {
+            font-weight: 400;
+            color: #444;
+            font-size: 14px;
+        }
+
+        .contato .whatsapp-btn {
+            background: #25D366;
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.3s;
+        }
+
+        .contato .whatsapp-btn:hover {
+            background: #1ebe5c;
+        }
+
+        .local {
+            text-align: center;
+            font-size: 14px;
+            color: #444;
+            font-weight: 500;
+            padding: 10px 16px;
+            background: #f5f7fa;
+            border-radius: 12px;
+            border: 1px dashed #d0d7e2;
+            margin-top: 4px;
+        }
+
+        .local strong {
+            color: #0d47a1;
+        }
+
+        .local .pin {
+            margin-right: 6px;
+        }
+
+        .rodape {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid #e8ecf0;
+            font-size: 11px;
+            color: #aaa;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .rodape .selo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #0d47a1;
+            font-weight: 600;
+        }
+
+        .rodape .selo span {
+            font-size: 14px;
+        }
+
+        @media print {
+            body { background: white; }
+            .card { box-shadow: none; border: 1px solid #ddd; }
+        }
+
+        @media (max-width: 650px) {
+            .card {
+                padding: 24px 16px 20px 16px;
+                border-radius: 18px;
+            }
+            .titulo { font-size: 22px; }
+            .preco { font-size: 42px; }
+            .preco .real { font-size: 22px; }
+            .preco .centavos { font-size: 18px; }
+            .lista-servicos li {
+                font-size: 13px;
+                padding: 7px 10px;
+                flex-wrap: wrap;
+            }
+            .lista-servicos li .emoji { font-size: 16px; width: 24px; }
+            .lista-servicos li .obs {
+                font-size: 10px;
+                margin-left: 0;
+                white-space: normal;
+                width: 100%;
+                padding: 2px 8px;
+                text-align: left;
+            }
+            .contato {
+                flex-direction: column;
+                gap: 6px;
+                padding: 10px 14px;
+            }
+            .contato .texto-contato {
+                font-size: 16px;
+            }
+            .local { font-size: 12px; padding: 10px 12px; }
+            .rodape {
+                flex-direction: column;
+                gap: 6px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+
+        <div class="icon-header">
+            <span>🖥️</span>
+        </div>
+
+        <h1 class="titulo">
+            FORMATAÇÃO DE <span>COMPUTADORES</span> & NOTEBOOKS
+        </h1>
+        <div class="subtitulo">• SERVIÇO COMPLETO •</div>
+
+        <div class="divider"></div>
+
+        <!-- Lista de serviços ATUALIZADA -->
+        <ul class="lista-servicos">
+            <li>
+                <span class="emoji">☁️</span>
+                Backup de Segurança Completo
+                <span class="detalhe">(Nuvem, Pasta)</span>
+            </li>
+            <li>
+                <span class="emoji">🖥️</span>
+                Instalação de Windows ou Linux
+            </li>
+            <li>
+                <span class="emoji">⚡</span>
+                Drivers Atualizados
+            </li>
+            <li>
+                <span class="emoji">📦</span>
+                Programas Essenciais Configurados
+                <span class="detalhe">(Office, Navegador, Antivírus)</span>
+            </li>
+            <li>
+                <span class="emoji">🧹</span>
+                Limpeza Interna / Externa
+                <span class="detalhe">(Remoção de poeira, troca de pasta térmica)</span>
+                <span class="obs"></span>
+            </li>
+            <li>
+                <span class="emoji">🔧</span>
+                Montagem de Máquinas
+                <span class="detalhe">(Hardware sob medida)</span>
+                <span class="obs">📋 orçamento sob consulta</span>
+            </li>
+        </ul>
+
+        <!-- Preço -->
+        <div class="preco-wrapper">
+            <div class="por-apenas">Formatação e limpeza de computadores/notebooks cada a partir de</div>
+            <div class="preco">
+                <span class="real">R$</span>120<span class="centavos">,00</span>
+            </div>
+            <div class="badge">✅ SEM TAXAS OCULTAS | 📋 ORÇAMENTO GRATUITO</div>
+        </div>
+
+        <!-- Contato - DESTAQUE -->
+        <div class="contato">
+            <span class="icone-contato">📱</span>
+            <span class="texto-contato">
+                (19) 99203-2689 <span>— WhatsApp</span>
+            </span>
+            <a href="https://wa.me/5519992032689" target="_blank" class="whatsapp-btn">
+                💬 Falar agora
+            </a>
+        </div>
+
+        <!-- Localização -->
+        <div class="local">
+            <span class="pin">📍</span>
+            Atendimento Profissional em <strong>LIMEIRA - SP</strong>
+            <span style="color:#999;font-weight:400;font-size:12px;margin-left:6px;">• Região •</span>
+        </div>
+
+        <!-- Rodapé -->
+        <div class="rodape">
+            <span>🔒 100% Seguro</span>
+            <span class="selo">
+                <span>⭐</span> Profissional Certificado
+            </span>
+            <span>⏱️ Agende já!</span>
+        </div>
+
+    </div>
+
+</body>
+</html>
